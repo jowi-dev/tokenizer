@@ -1,23 +1,33 @@
 
-using TokenType = std::string;
-
-struct Token {
-  TokenType Type;
-  std::string Literal;
+enum class Token {
+  ILLEGAL, 
+  FILEEND,
+  NEWLINE, 
+  DEFINE,
+  DO, 
+  END,
+  IDENT ,
+  INT ,
+  ASSIGN ,
+  PLUS ,
+  LPAREN ,
+  RPAREN 
 };
 
-constexpr TokenType ILLEGAL = "ILLEGAL";
-constexpr TokenType EOF = "EOF";
-constexpr TokenType NEWLINE = "\n";
-
-constexpr TokenType DEFINE = "def";
-constexpr TokenType DO = "do";
-constexpr TokenType END = "end";
-
-constexpr TokenType IDENT = "IDENT"; // Identifier
-constexpr TokenType INT = "INT"; //Integer literal
-
-constexpr TokenType ASSIGN = "=";
-constexpr TokenType PLUS = "+";
-constexpr TokenType LPAREN = "(";
-constexpr TokenType RPAREN = ")";
+constexpr const char* getTokenLiteral(Token type) {
+  switch(type) {
+    case Token::ILLEGAL: return "ILLEGAL";
+    case Token::FILEEND: return "EOF";
+    case Token::NEWLINE: return "\n";
+    case Token::DEFINE: return "def";
+    case Token::DO: return "do";
+    case Token::END: return "end";
+    case Token::IDENT: return "IDENT"; // Identifie
+    case Token::INT: return "INT"; //Integer litera
+    case Token::ASSIGN: return "=";
+    case Token::PLUS: return "+";
+    case Token::LPAREN: return "(";
+    case Token::RPAREN: return ")";
+    default: return "ILLEGAL";
+  }
+}
