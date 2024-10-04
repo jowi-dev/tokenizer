@@ -1,5 +1,6 @@
-#include "./token.cpp"
+#include <string>
 
+#include "./token.cpp"
 
 
 Token getTokenType(std::string literal) {
