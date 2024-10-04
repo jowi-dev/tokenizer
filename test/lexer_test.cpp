@@ -5,37 +5,37 @@
 
 
 TEST_CASE("Function Header: def", "[lexer]")  {
-  REQUIRE(getTokenType("def") == Token::DEFINE);
+  REQUIRE(getTokenType("def") == TokenType::DEFINE);
 }
 
 TEST_CASE("Statement Start: do", "[lexer]")  {
-  REQUIRE(getTokenType("do") == Token::DO);
+  REQUIRE(getTokenType("do") == TokenType::DO);
 }
 
 TEST_CASE("Statement Finish: end", "[lexer]")  {
-  REQUIRE(getTokenType("end") == Token::END);
+  REQUIRE(getTokenType("end") == TokenType::END);
 }
 
 TEST_CASE("Variable Naming: [A-Za-z_]", "[lexer]")  {
-  REQUIRE(getTokenType("helloWorld") == Token::IDENT);
+  REQUIRE(getTokenType("helloWorld") == TokenType::IDENT);
 }
 
 TEST_CASE("Literal: [0-9]", "[lexer]")  {
-  REQUIRE(getTokenType("856") == Token::INT);
+  REQUIRE(getTokenType("856") == TokenType::INT);
 }
 
 TEST_CASE("Assignment: =", "[lexer]")  {
-  REQUIRE(getTokenType("=") == Token::ASSIGN);
+  REQUIRE(getTokenType("=") == TokenType::ASSIGN);
 }
 
 TEST_CASE("Addition: +", "[lexer]")  {
-  REQUIRE(getTokenType("+") == Token::PLUS);
+  REQUIRE(getTokenType("+") == TokenType::PLUS);
 }
 
 TEST_CASE("Delimiter Open: (", "[lexer]")  {
-  REQUIRE(getTokenType("(") == Token::LPAREN);
+  REQUIRE(getTokenType("(") == TokenType::LPAREN);
 }
 
 TEST_CASE("Delimiter Close: )", "[lexer]")  {
-  REQUIRE(getTokenType(")") == Token::RPAREN);
+  REQUIRE(getTokenType(")") == TokenType::RPAREN);
 }

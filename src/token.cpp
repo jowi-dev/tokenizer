@@ -1,5 +1,6 @@
+#include <string>
 
-enum class Token {
+enum class TokenType {
   ILLEGAL, 
   FILEEND,
   NEWLINE, 
@@ -18,20 +19,32 @@ enum class Token {
   RPAREN 
 };
 
-constexpr const char* getTokenLiteral(Token type) {
+constexpr const char* getTokenLiteral(TokenType type) {
   switch(type) {
-    case Token::ILLEGAL: return "ILLEGAL";
-    case Token::FILEEND: return "EOF";
-    case Token::NEWLINE: return "\n";
-    case Token::DEFINE: return "def";
-    case Token::DO: return "do";
-    case Token::END: return "end";
-    case Token::IDENT: return "IDENT"; // Identifie
-    case Token::INT: return "INT"; //Integer litera
-    case Token::ASSIGN: return "=";
-    case Token::PLUS: return "+";
-    case Token::LPAREN: return "(";
-    case Token::RPAREN: return ")";
+    case TokenType::ILLEGAL: return "ILLEGAL";
+    case TokenType::FILEEND: return "EOF";
+    case TokenType::NEWLINE: return "\n";
+    case TokenType::DEFINE: return "def";
+    case TokenType::DO: return "do";
+    case TokenType::END: return "end";
+    case TokenType::IDENT: return "IDENT"; // Identifie
+    case TokenType::INT: return "INT"; //Integer litera
+    case TokenType::ASSIGN: return "=";
+    case TokenType::PLUS: return "+";
+    case TokenType::LPAREN: return "(";
+    case TokenType::RPAREN: return ")";
     default: return "ILLEGAL";
   }
 }
+
+class Token {
+
+  TokenType type;
+  std::string literal;
+
+  Token(TokenType tokenType, std::string lit) {
+    type = tokenType;
+    literal = lit;
+  }
+
+};

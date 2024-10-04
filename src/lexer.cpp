@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include "./token.cpp"
 
@@ -12,18 +13,27 @@ bool isInteger(std::string literal) {
   return false;
 }
 
-Token getTokenType(std::string literal) {
-  if(literal == "def") return Token::DEFINE; 
-  if(literal == "do") return Token::DO; 
-  if(literal == "end") return Token::END; 
-  if(literal == "=") return Token::ASSIGN; 
-  if(literal == "+") return Token::PLUS; 
-  if(literal == "(") return Token::LPAREN; 
-  if(literal == ")") return Token::RPAREN; 
-  if(isInteger(literal)) return Token::INT; 
+TokenType getTokenType(std::string literal) {
+  if(literal == "def") return TokenType::DEFINE; 
+  if(literal == "do") return TokenType::DO; 
+  if(literal == "end") return TokenType::END; 
+  if(literal == "=") return TokenType::ASSIGN; 
+  if(literal == "+") return TokenType::PLUS; 
+  if(literal == "(") return TokenType::LPAREN; 
+  if(literal == ")") return TokenType::RPAREN; 
+  if(isInteger(literal)) return TokenType::INT; 
 
   // Identifier..?
-  //if(literal == "") return Token::END; 
-  return Token::ILLEGAL;
+  //if(literal == "") return Token::IDENT; 
+  return TokenType::ILLEGAL;
 }
 
+std::vector<Token> parseTokens(std::string expression) {
+  std::vector<Token> parsed;
+
+  //string.split whitespace
+  //for each member of the split up string 
+  //get the token, peak the next one if necessary
+
+  return parsed;
+}
