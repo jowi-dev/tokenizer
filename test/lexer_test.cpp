@@ -13,7 +13,7 @@ TEST_CASE("Statement Start: do", "[lexer]")  {
 }
 
 TEST_CASE("Statement Finish: end", "[lexer]")  {
-  REQUIRE(getTokenType("do") == Token::END);
+  REQUIRE(getTokenType("end") == Token::END);
 }
 
 TEST_CASE("Variable Naming: [A-Za-z_]", "[lexer]")  {

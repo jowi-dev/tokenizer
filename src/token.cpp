@@ -3,13 +3,17 @@ enum class Token {
   ILLEGAL, 
   FILEEND,
   NEWLINE, 
+  // Keywords
   DEFINE,
   DO, 
   END,
+  // Identifiers and Literals
   IDENT ,
   INT ,
+  // Operators
   ASSIGN ,
   PLUS ,
+  // Delimiters
   LPAREN ,
   RPAREN 
 };
