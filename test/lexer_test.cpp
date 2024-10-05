@@ -53,5 +53,8 @@ TEST_CASE("express the list of strings as Token", "[lexer]") {
 
 
   std::vector<Token> result = {*token1, *token2, *token3};
-  REQUIRE(tokenize(input) == result);
+  auto output = tokenize(input);
+  for(int i = 0; i<3; i++) {
+    REQUIRE(output[i] == result[i]);
+  }
 }

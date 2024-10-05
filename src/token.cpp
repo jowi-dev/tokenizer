@@ -38,13 +38,13 @@ constexpr const char* getTokenLiteral(TokenType type) {
 }
 
 class Token {
+  public:
+    TokenType type;
+    std::string literal;
 
-  TokenType type;
-  std::string literal;
-
-  public: Token(TokenType tokenType, std::string lit) {
-    type = tokenType;
-    literal = lit;
-  }
-
+    Token(TokenType tokenType, std::string lit) {
+      type = tokenType;
+      literal = lit;
+    }
+    auto operator<=>(const Token&) const = default;
 };
