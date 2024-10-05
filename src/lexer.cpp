@@ -30,8 +30,6 @@ TokenType getTokenType(std::string literal) {
   if(isInteger(literal)) return TokenType::INT; 
   if(isLiteral(literal)) return TokenType::IDENT;
 
-  // Identifier..?
-  //if(literal == "") return Token::IDENT; 
   return TokenType::ILLEGAL;
 }
 
@@ -45,11 +43,13 @@ std::vector<std::string> split(const std::string& expression, char delimiter) {
     return tokens;
 }
 
-std::vector<Token> parseTokens(std::string expression) {
+std::vector<Token> tokenize(std::string expression) {
   std::vector<Token> parsed;
   std::vector<std::string> words = split(expression, ' ');
   for(int i = 0; i < words.size(); i++){
-
+    TokenType type = getTokenType(words[i]);
+    Token* token = new Token(type, words[i]);
+    parsed.push_back(*token);
   }
 
   //string.split whitespace

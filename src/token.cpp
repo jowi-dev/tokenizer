@@ -42,7 +42,7 @@ class Token {
   TokenType type;
   std::string literal;
 
-  Token(TokenType tokenType, std::string lit) {
+  public: Token(TokenType tokenType, std::string lit) {
     type = tokenType;
     literal = lit;
   }

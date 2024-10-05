@@ -44,3 +44,14 @@ TEST_CASE("Splits an expression into a string of tokens", "[lexer]") {
   std::vector<std::string> result = {"the", "brown", "cow"};
   REQUIRE(split("the brown cow", ' ') == result);
 }
+
+TEST_CASE("express the list of strings as Token", "[lexer]") {
+  std::string input = "myvar = 856";
+  Token* token1 = new Token(TokenType::IDENT, "myvar");
+  Token* token2 = new Token(TokenType::ASSIGN, "=");
+  Token* token3 = new Token(TokenType::INT, "856");
+
+
+  std::vector<Token> result = {*token1, *token2, *token3};
+  REQUIRE(tokenize(input) == result);
+}
