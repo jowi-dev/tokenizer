@@ -1,6 +1,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <regex>
 
 #include "./token.cpp"
 
@@ -13,6 +14,11 @@ bool isInteger(std::string literal) {
   return false;
 }
 
+bool isLiteral(std::string token) {
+  std::regex pattern("[A-Za-z_]");
+  return std::regex_search(token, pattern);
+}
+
 TokenType getTokenType(std::string literal) {
   if(literal == "def") return TokenType::DEFINE; 
   if(literal == "do") return TokenType::DO; 
@@ -22,6 +28,7 @@ TokenType getTokenType(std::string literal) {
   if(literal == "(") return TokenType::LPAREN; 
   if(literal == ")") return TokenType::RPAREN; 
   if(isInteger(literal)) return TokenType::INT; 
+  if(isLiteral(literal)) return TokenType::IDENT;
 
   // Identifier..?
   //if(literal == "") return Token::IDENT; 
