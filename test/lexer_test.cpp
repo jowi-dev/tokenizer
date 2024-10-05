@@ -39,3 +39,8 @@ TEST_CASE("Delimiter Open: (", "[lexer]")  {
 TEST_CASE("Delimiter Close: )", "[lexer]")  {
   REQUIRE(getTokenType(")") == TokenType::RPAREN);
 }
+
+TEST_CASE("Splits an expression into a string of tokens", "[lexer]") {
+  std::vector<std::string> result = {"the", "brown", "cow"};
+  REQUIRE(split("the brown cow", ' ') == result);
+}

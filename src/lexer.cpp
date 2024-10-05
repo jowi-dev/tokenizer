@@ -28,8 +28,22 @@ TokenType getTokenType(std::string literal) {
   return TokenType::ILLEGAL;
 }
 
+std::vector<std::string> split(const std::string& expression, char delimiter) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(expression);
+    while (std::getline(tokenStream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
 std::vector<Token> parseTokens(std::string expression) {
   std::vector<Token> parsed;
+  std::vector<std::string> words = split(expression, ' ');
+  for(int i = 0; i < words.size(); i++){
+
+  }
 
   //string.split whitespace
   //for each member of the split up string 
