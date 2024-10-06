@@ -47,6 +47,22 @@ TEST_CASE("Splits an expression into a string of tokens", "[lexer]") {
 
 TEST_CASE("express the list of strings as Token", "[lexer]") {
   std::string input = "myvar = 856";
+
+  Token* token1 = new Token(TokenType::IDENT, "myvar");
+  Token* token2 = new Token(TokenType::ASSIGN, "=");
+  Token* token3 = new Token(TokenType::INT, "856");
+
+
+  std::vector<Token> result = {*token1, *token2, *token3};
+  auto output = tokenize(input);
+  for(int i = 0; i<3; i++) {
+    REQUIRE(output[i] == result[i]);
+  }
+}
+
+TEST_CASE("input is not whitespace sensitive", "[lexer]") {
+  std::string input = "myvar=856";
+
   Token* token1 = new Token(TokenType::IDENT, "myvar");
   Token* token2 = new Token(TokenType::ASSIGN, "=");
   Token* token3 = new Token(TokenType::INT, "856");
