@@ -14,12 +14,18 @@ bool isInteger(std::string literal) {
   return false;
 }
 
+//for tracking special characters, will grow over time
+bool isSpecial(char token) {
+  return token == '=' || token == '+';
+}
+
 bool isLiteral (char token) {
   return  (token & ~32) - 'A' < 26 || token == '_';
 }
 bool isLiteral(std::string token) {
   std::regex pattern("[A-Za-z_]");
-  return std::regex_search(token, pattern);
+  std::regex anti_pattern("[0-9+\()=]");
+  return std::regex_search(token, pattern) && !std::regex_search(token, anti_pattern);
 }
 
 TokenType getTokenType(std::string literal) {
@@ -49,15 +55,16 @@ std::vector<std::string> split(const std::string& expression, char delimiter) {
 std::vector<Token> tokenize(std::string expression) {
   std::vector<Token> parsed;
   std::vector<std::string> words = split(expression, ' ');
-  for(int i = 0; i < words.size(); i++){
+  for(size_t i = 0; i < words.size(); i++){
     // If the string contains non-alpha characters or special characters that are not _, we need to parse by character
     if(!isLiteral(words[i]) && !isInteger(words[i]) && words[i].length() > 1) {
       // start position of identifier
       int start_pos = 0;
-      for(int j = 0; j < words[i].length(); j++){
+      for(size_t j = 0; j < words[i].length(); j++){
         //if the current character is non-alpha, it is a token type we can parse
-        if(!isLiteral(words[i][j])){
-          std::string term = std::to_string(words[i][j]);
+        if(isSpecial(words[i][j])){
+          std::string term;
+          term.push_back(words[i][j]);
           TokenType type = getTokenType(term);
           Token* token = new Token(type, term);
           parsed.push_back(*token);
@@ -68,8 +75,8 @@ std::vector<Token> tokenize(std::string expression) {
 
         } 
         //peak the next term to see if it is alpha. if not, we have reached the end of the identifier
-        else if(!isLiteral(words[i][j+1])){
-          std::string term = words[i].substr(start_pos, j-start_pos);
+        else if(isSpecial(words[i][j+1]) || (j == (words[i].length() - 1))){
+          std::string term = words[i].substr(start_pos, (j-start_pos) + 1);
           TokenType type = getTokenType(term);
           Token* token = new Token(type, term);
           parsed.push_back(*token);
