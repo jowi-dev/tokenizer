@@ -6,8 +6,9 @@
 int main() {
     std::string userInput;
     
+        std::cout << "banjOScript REPL! (type 'quit' to exit)" << std::endl;
     while (true) {
-        std::cout << "Enter a line of text (or 'quit' to exit): ";
+        std::cout << "banjOScript> ";
         std::getline(std::cin, userInput);
         
         if (userInput == "quit") {
