@@ -86,3 +86,17 @@ TEST_CASE("Function definitions", "[lexer]") {
   REQUIRE(output[4] == *(new Token(TokenType::RPAREN, ")")));
   REQUIRE(output[5] == *(new Token(TokenType::DO, "do")));
 }
+
+TEST_CASE("Multiple argument function, no space", "[lexer]") {
+  std::string input = "def myFunc(num,str) do";
+  auto output = tokenize(input);
+
+  REQUIRE(output[0] == *(new Token(TokenType::DEFINE, "def")));
+  REQUIRE(output[1] == *(new Token(TokenType::IDENT, "myFunc")));
+  REQUIRE(output[2] == *(new Token(TokenType::LPAREN, "(")));
+  REQUIRE(output[3] == *(new Token(TokenType::IDENT, "num")));
+  REQUIRE(output[4] == *(new Token(TokenType::COMMA, ",")));
+  REQUIRE(output[5] == *(new Token(TokenType::IDENT, "str")));
+  REQUIRE(output[6] == *(new Token(TokenType::RPAREN, ")")));
+  REQUIRE(output[7] == *(new Token(TokenType::DO, "do")));
+}

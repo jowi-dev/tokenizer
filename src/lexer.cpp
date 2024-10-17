@@ -14,9 +14,13 @@ bool isInteger(std::string literal) {
   return false;
 }
 
+constexpr std::array<char, 5> specialCharacters = {'=', '+', '(', ')', ','};
 //for tracking special characters, will grow over time
 bool isSpecial(char token) {
-  return token == '=' || token == '+' || token == '(' || token == ')';
+  for(auto it = specialCharacters.begin(); it != specialCharacters.end(); ++it){
+    if ( token == *it ) return true;
+  }
+  return false;
 }
 
 bool isLiteral (char token) {
@@ -24,7 +28,7 @@ bool isLiteral (char token) {
 }
 bool isLiteral(std::string token) {
   std::regex pattern("[A-Za-z_]");
-  std::regex anti_pattern("[0-9+\()=]");
+  std::regex anti_pattern("[0-9+\()=,]");
   return std::regex_search(token, pattern) && !std::regex_search(token, anti_pattern);
 }
 
@@ -36,6 +40,7 @@ TokenType getTokenType(std::string literal) {
   if(literal == "+") return TokenType::PLUS; 
   if(literal == "(") return TokenType::LPAREN; 
   if(literal == ")") return TokenType::RPAREN; 
+  if(literal == ",") return TokenType::COMMA; 
   if(isInteger(literal)) return TokenType::INT; 
   if(isLiteral(literal)) return TokenType::IDENT;
 
@@ -71,8 +76,6 @@ std::vector<Token> tokenize(std::string expression) {
 
           //the position of the next potential identifier is after this term
           start_pos = j+1;
-
-
         } 
         //peak the next term to see if it is alpha. if not, we have reached the end of the identifier
         else if(isSpecial(words[i][j+1]) || (j == (words[i].length() - 1))){

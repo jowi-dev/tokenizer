@@ -17,6 +17,7 @@ enum class TokenType {
   // Delimiters
   LPAREN ,
   RPAREN,
+  COMMA ,
   COUNT
 };
 
@@ -33,7 +34,8 @@ constexpr std::array<std::string_view, static_cast<size_t>(TokenType::COUNT)> To
   "ASSIGN" ,
   "PLUS" ,
   "LPAREN" ,
-  "RPAREN" 
+  "RPAREN" ,
+  "COMMA"
 };
 // Function to convert enum to string
 std::string TokenToString(TokenType token) {
