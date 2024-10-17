@@ -74,3 +74,15 @@ TEST_CASE("input is not whitespace sensitive", "[lexer]") {
     REQUIRE(output[i] == result[i]);
   }
 }
+
+TEST_CASE("Function definitions", "[lexer]") {
+  std::string input = "def myFunc(num) do";
+  auto output = tokenize(input);
+
+  REQUIRE(output[0] == *(new Token(TokenType::DEFINE, "def")));
+  REQUIRE(output[1] == *(new Token(TokenType::IDENT, "myFunc")));
+  REQUIRE(output[2] == *(new Token(TokenType::LPAREN, "(")));
+  REQUIRE(output[3] == *(new Token(TokenType::IDENT, "num")));
+  REQUIRE(output[4] == *(new Token(TokenType::RPAREN, ")")));
+  REQUIRE(output[5] == *(new Token(TokenType::DO, "do")));
+}

@@ -16,7 +16,7 @@ bool isInteger(std::string literal) {
 
 //for tracking special characters, will grow over time
 bool isSpecial(char token) {
-  return token == '=' || token == '+';
+  return token == '=' || token == '+' || token == '(' || token == ')';
 }
 
 bool isLiteral (char token) {
