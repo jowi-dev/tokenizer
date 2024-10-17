@@ -16,12 +16,17 @@ TEST_CASE("Statement Finish: end", "[lexer]")  {
   REQUIRE(getTokenType("end") == TokenType::END);
 }
 
-TEST_CASE("Variable Naming: [A-Za-z_]", "[lexer]")  {
+TEST_CASE("Variable Naming: [A-Za-z_0-9]", "[lexer]")  {
   REQUIRE(getTokenType("helloWorld") == TokenType::IDENT);
+  REQUIRE(getTokenType("hello2World") == TokenType::IDENT);
+  REQUIRE(getTokenType("hello_world") == TokenType::IDENT);
+  REQUIRE(getTokenType("_hello") == TokenType::ILLEGAL);
+  REQUIRE(getTokenType("22hello") == TokenType::ILLEGAL);
 }
 
 TEST_CASE("Literal: [0-9]", "[lexer]")  {
   REQUIRE(getTokenType("856") == TokenType::INT);
+  REQUIRE(getTokenType("856h") == TokenType::ILLEGAL);
 }
 
 TEST_CASE("Assignment: =", "[lexer]")  {

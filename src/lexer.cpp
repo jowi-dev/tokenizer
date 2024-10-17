@@ -6,12 +6,35 @@
 #include "./token.cpp"
 
 
+bool isInteger(const std::string& str) {
+    // Check if the string is empty
+    if (str.empty()) {
+        return false;
+    }
 
-bool isInteger(std::string literal) {
-  int num;
-  std::istringstream iss(literal);
-  if (iss >> num) return true;
-  return false;
+    // Iterator to the first non-whitespace character
+    auto it = std::find_if(str.begin(), str.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    });
+
+    // If all characters are whitespace, it's not a valid integer
+    if (it == str.end()) {
+        return false;
+    }
+
+    // Check for optional sign
+    if (*it == '+' || *it == '-') {
+        ++it;
+        // If there's only a sign, it's not a valid integer
+        if (it == str.end()) {
+            return false;
+        }
+    }
+
+    // Check if all remaining characters are digits
+    return std::all_of(it, str.end(), [](unsigned char ch) {
+        return std::isdigit(ch);
+    });
 }
 
 constexpr std::array<char, 5> specialCharacters = {'=', '+', '(', ')', ','};
@@ -27,9 +50,9 @@ bool isLiteral (char token) {
   return  (token & ~32) - 'A' < 26 || token == '_';
 }
 bool isLiteral(std::string token) {
-  std::regex pattern("[A-Za-z_]");
-  std::regex anti_pattern("[0-9+\()=,]");
-  return std::regex_search(token, pattern) && !std::regex_search(token, anti_pattern);
+  std::regex pattern("^[a-zA-Z][a-zA-Z0-9_]*$");
+  //std::regex anti_pattern("[0-9+\()=,]");
+  return std::regex_search(token, pattern); //&& !std::regex_search(token, anti_pattern);
 }
 
 TokenType getTokenType(std::string literal) {
